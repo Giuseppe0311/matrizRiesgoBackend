@@ -2,9 +2,9 @@ spring:
   application:
     name: matriz
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
+    url: jdbc:postgresql://localhost:5436/seg
+    username: user
+    password: secret
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
