@@ -28,6 +28,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Agregar configuración CORS
                 .authorizeHttpRequests(http -> {
                     http.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll();  // Permitir acceso a Swagger
                     http.anyRequest().authenticated();
@@ -41,10 +42,16 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH"));
-        configuration.setAllowedHeaders(Arrays.asList("authorization", "Content-Type", "x-auth-token","Access-Control-Allow-Origin"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); // Reemplaza con tu origen real
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList(
+                "Authorization",
+                "Content-Type",
+                "X-Auth-Token"
+        ));
         configuration.setExposedHeaders(List.of("Content-Disposition"));
+        configuration.setAllowCredentials(true);
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
