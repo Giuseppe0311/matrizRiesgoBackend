@@ -8,13 +8,18 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
   security:
     oauth2:
       resourceserver:
         jwt:
           issuer-uri:  http://localhost:8080/realms/matriz
           jwk-set-uri: http://localhost:8080/realms/matriz/protocol/openid-connect/certs
+  flyway:
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    url: jdbc:postgresql://localhost:5436/seg
+    locations: db.migration
 jwt:
   auth:
     converter:
