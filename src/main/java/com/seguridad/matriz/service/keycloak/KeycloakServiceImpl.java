@@ -130,10 +130,6 @@ public class KeycloakServiceImpl implements KeycloakService{
 
     @Override
     public void updateUser(String userId, UserDTO userDTO) {
-        CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
-        credentialRepresentation.setTemporary(false);
-        credentialRepresentation.setType(OAuth2Constants.PASSWORD);
-        credentialRepresentation.setValue(userDTO.password());
         UserRepresentation user = new UserRepresentation();
         user.setUsername(userDTO.username());
         user.setFirstName(userDTO.firstName());
@@ -141,14 +137,24 @@ public class KeycloakServiceImpl implements KeycloakService{
         user.setEmail(userDTO.email());
         user.setEnabled(true);
         user.setEmailVerified(true);
-        user.setCredentials(Collections.singletonList(credentialRepresentation));
+
+        if (userDTO.password() != null && !userDTO.password().isEmpty()) {
+            CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
+            credentialRepresentation.setTemporary(false);
+            credentialRepresentation.setType(OAuth2Constants.PASSWORD);
+            credentialRepresentation.setValue(userDTO.password());
+            user.setCredentials(Collections.singletonList(credentialRepresentation));
+        }
+
         UserResource usersResource = KeycloakProvider.getUserResource().get(userId);
         usersResource.update(user);
+
         List<RoleRepresentation> currentRoles = usersResource.roles().realmLevel().listAll();
         List<RoleRepresentation> nonDefaultRoles = currentRoles.stream()
                 .filter(role -> !role.getName().startsWith("default"))
                 .toList();
         usersResource.roles().realmLevel().remove(nonDefaultRoles);
+
         RealmResource realmResource = KeycloakProvider.getRealmResource();
         List<RoleRepresentation> rolesRepresentation;
         if (userDTO.roles() == null || userDTO.roles().isEmpty()) {
@@ -163,6 +169,7 @@ public class KeycloakServiceImpl implements KeycloakService{
                     .toList();
         }
         usersResource.roles().realmLevel().add(rolesRepresentation);
+
         log.info("User updated successfully for user: {}", userDTO.username());
     }
 }
