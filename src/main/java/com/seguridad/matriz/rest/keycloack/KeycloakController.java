@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/keycloak/user")
+@RequestMapping("/api/v1/keycloak/user")
 @PreAuthorize("hasRole('admin_client')")
 @RequiredArgsConstructor
 public class KeycloakController {
@@ -34,14 +35,18 @@ public class KeycloakController {
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) throws URISyntaxException {
         String response = keycloakService.createUser(userDTO);
-        return ResponseEntity.created(new URI("/keycloak/user/create")).body(response);
+        return ResponseEntity.created(new URI("/keycloak/user/create")).body(
+                Map.of("message", response)
+        );
     }
 
 
     @PutMapping("/update/{userId}")
     public ResponseEntity<?> updateUser(@PathVariable String userId, @RequestBody UserDTO userDTO){
         keycloakService.updateUser(userId, userDTO);
-        return ResponseEntity.ok("User updated successfully");
+        return ResponseEntity.ok(Map.of(
+                "message", "User updated successfully"
+        ));
     }
 
 
