@@ -1,13 +1,13 @@
 package com.seguridad.matriz.rest;
 
 import com.seguridad.matriz.domain.Iso;
-import com.seguridad.matriz.dto.IsoCreateDTO;
-import com.seguridad.matriz.dto.IsoUpdateDTO;
-import com.seguridad.matriz.dto.IsoViewDTO;
+import com.seguridad.matriz.dto.iso.IsoCreateDTO;
+import com.seguridad.matriz.dto.iso.IsoUpdateDTO;
+import com.seguridad.matriz.dto.iso.IsoViewDTO;
 import com.seguridad.matriz.dto.mappers.DTOMapper;
-import com.seguridad.matriz.dto.mappers.IsoCreateDTOMapper;
-import com.seguridad.matriz.dto.mappers.IsoUpdateDTOMapper;
-import com.seguridad.matriz.dto.mappers.IsoViewDTOMapper;
+import com.seguridad.matriz.dto.mappers.iso.IsoCreateDTOMapper;
+import com.seguridad.matriz.dto.mappers.iso.IsoUpdateDTOMapper;
+import com.seguridad.matriz.dto.mappers.iso.IsoViewDTOMapper;
 import com.seguridad.matriz.service.CrudService;
 import com.seguridad.matriz.service.IsoService;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,6 @@
-package com.seguridad.matriz.dto;
+package com.seguridad.matriz.dto.user;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Set;
 
 
@@ -8,6 +10,7 @@ public record UserDTO(
         String firstName,
         String lastName,
         String password,
+        Long idEmpresa,
         Set<String> roles
 ) {
 }

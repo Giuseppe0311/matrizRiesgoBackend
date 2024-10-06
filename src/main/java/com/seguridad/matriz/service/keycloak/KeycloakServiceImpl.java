@@ -1,8 +1,14 @@
 package com.seguridad.matriz.service.keycloak;
 
-import com.seguridad.matriz.dto.UserDTO;
+import com.seguridad.matriz.domain.Eventos;
+import com.seguridad.matriz.domain.Usuarios;
+import com.seguridad.matriz.dto.user.UserDTO;
 import com.seguridad.matriz.provider.KeycloakProvider;
+import com.seguridad.matriz.repository.EventosRepository;
+import com.seguridad.matriz.repository.UsuariosRepository;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.resource.RealmResource;
@@ -11,19 +17,18 @@ import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class KeycloakServiceImpl implements KeycloakService{
-    public static final   String CLIENT_ID = "matriz-riesgo";
+    private final UsuariosRepository usuariosRepository;
+    private final EventosRepository eventosRepository;
 
     @Override
     public List<UserRepresentation> findAllUsers() {
@@ -33,6 +38,20 @@ public class KeycloakServiceImpl implements KeycloakService{
 
         return getUserRepresentations(users);
     }
+    @Override
+    public List<UserRepresentation> searchUserByProfile(String profile) {
+        List<UserRepresentation> allUsers = KeycloakProvider.getRealmResource()
+                .users()
+                .list();
+
+        List<UserRepresentation> usersWithRoles = getUserRepresentations(allUsers);
+
+        return usersWithRoles.stream()
+                .filter(user -> user.getRealmRoles() != null &&
+                        user.getRealmRoles().contains(profile))
+                .toList();
+    }
+
 
     @Override
     public List<UserRepresentation> searchUserByUsername(String username) {
@@ -64,6 +83,7 @@ public class KeycloakServiceImpl implements KeycloakService{
     }
 
     @Override
+    @Transactional
     public String createUser(UserDTO userDTO) {
         int status = 0;
         UsersResource usersResource = KeycloakProvider.getUserResource();
@@ -75,7 +95,11 @@ public class KeycloakServiceImpl implements KeycloakService{
         userRepresentation.setUsername(userDTO.username());
         userRepresentation.setEnabled(true);
         userRepresentation.setEmailVerified(true);
-
+        if (userDTO.idEmpresa() != null) {
+            Map<String, List<String>> attributes = new HashMap<>();
+            attributes.put("idEmpresa", Collections.singletonList(userDTO.idEmpresa().toString()));  // Convierte el ID a String si es necesario
+            userRepresentation.setAttributes(attributes);
+        }
         Response response = usersResource.create(userRepresentation);
 
         status = response.getStatus();
@@ -84,6 +108,15 @@ public class KeycloakServiceImpl implements KeycloakService{
             String path = response.getLocation().getPath();
             String userId = path.substring(path.lastIndexOf("/") + 1);
 
+
+            Usuarios usuario = new Usuarios();
+            usuario.setId(userId);  // Guardar el userId de Keycloak
+            usuario.setUsername(userDTO.username());
+            usuario.setNombre(userDTO.firstName());
+            usuario.setApellido(userDTO.lastName());
+            usuario.setEmail(userDTO.email());
+            usuario.setIdEmpresa(userDTO.idEmpresa());
+            usuariosRepository.save(usuario);
             CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
             credentialRepresentation.setTemporary(false);
             credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
@@ -121,10 +154,22 @@ public class KeycloakServiceImpl implements KeycloakService{
     }
 
     @Override
+    @Transactional
     public void deleteUser(String userId) {
-        KeycloakProvider.getUserResource()
-                .get(userId)
-                .remove();
+        try {
+            KeycloakProvider.getUserResource()
+                    .get(userId)
+                    .remove();
+        } catch (Exception e) {
+            log.error("Error deleting user with id: {}", userId);
+            return;
+        }
+        usuariosRepository.findById(userId).ifPresent(
+                usuario -> {
+                    usuario.setStatus(false);
+                    log.info("User deleted successfully for user: {}", usuario.getUsername());
+                }
+        );
 
     }
 
@@ -169,7 +214,14 @@ public class KeycloakServiceImpl implements KeycloakService{
                     .toList();
         }
         usersResource.roles().realmLevel().add(rolesRepresentation);
-
+        Usuarios usuarios = new Usuarios();
+        usuarios.setId(userId);
+        usuarios.setUsername(userDTO.username());
+        usuarios.setNombre(userDTO.firstName());
+        usuarios.setApellido(userDTO.lastName());
+        usuarios.setEmail(userDTO.email());
+        usuarios.setIdEmpresa(userDTO.idEmpresa());
+        usuariosRepository.save(usuarios);
         log.info("User updated successfully for user: {}", userDTO.username());
     }
 }

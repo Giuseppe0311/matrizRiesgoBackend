@@ -1,6 +1,7 @@
 package com.seguridad.matriz.service;
 
 import com.seguridad.matriz.domain.DomainObject;
+import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

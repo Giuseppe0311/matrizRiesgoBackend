@@ -1,9 +1,8 @@
-package com.seguridad.matriz.dto;
+package com.seguridad.matriz.dto.matriz;
 
-import java.util.List;
+import jakarta.validation.constraints.NotNull;
 
-public record MatrizViewDTO(
-        Long id,
+public record MatrizCreateDTO(
         String nombre,
         Integer minima,
         Integer menor,
@@ -23,8 +22,7 @@ public record MatrizViewDTO(
         Integer aNaranja,
         Integer deRojo,
         Integer aRojo,
-        List<EventoViewDTO> eventos,
-        Long idUsuario
-
-        ) {
+        @NotNull
+        Long idEmpresa
+) {
 }

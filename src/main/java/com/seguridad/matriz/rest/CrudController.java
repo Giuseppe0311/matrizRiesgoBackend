@@ -17,23 +17,23 @@ import java.util.Map;
 public interface CrudController<C, U, V> {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyRole('admin_client','user_client')")
+    @PreAuthorize("hasAnyRole('admin_client','user_client','superadmin_client')")
     List<V> getAll();
 
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyRole('admin_client','user_client')")
+    @PreAuthorize("hasAnyRole('admin_client','user_client','superadmin_client')")
     V getById(@PathVariable(required = false) Map<String, String> idMap);
 
     @PostMapping
-    @PreAuthorize("hasRole('admin_client')")
+    @PreAuthorize("hasAnyRole('admin_client','superadmin_client')")
     @ResponseStatus(HttpStatus.CREATED)
     V create(@Valid @RequestBody C createDTO);
 
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasRole('admin_client')")
+    @PreAuthorize("hasAnyRole('admin_client','superadmin_client')")
     V update(@Valid @RequestBody U updateDTO, @PathVariable(required = false) Map<String, String> idMap);
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PreAuthorize("hasRole('admin_client')")
+    @PreAuthorize("hasAnyRole('admin_client','superadmin_client')")
     void delete(@PathVariable(required = false) Map<String, String> idMap);
 }

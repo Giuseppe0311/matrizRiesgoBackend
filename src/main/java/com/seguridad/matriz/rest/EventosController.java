@@ -1,18 +1,20 @@
 package com.seguridad.matriz.rest;
 
 import com.seguridad.matriz.domain.Eventos;
-import com.seguridad.matriz.dto.EventoCreateDTO;
-import com.seguridad.matriz.dto.EventoUpdateDTO;
-import com.seguridad.matriz.dto.EventoViewDTO;
+import com.seguridad.matriz.dto.evento.EventoCreateDTO;
+import com.seguridad.matriz.dto.evento.EventoUpdateDTO;
+import com.seguridad.matriz.dto.evento.EventoViewDTO;
 import com.seguridad.matriz.dto.mappers.DTOMapper;
-import com.seguridad.matriz.dto.mappers.EventoCreateDTOMapper;
-import com.seguridad.matriz.dto.mappers.EventoUpdateDTOMapper;
-import com.seguridad.matriz.dto.mappers.EventoViewDTOMapper;
+import com.seguridad.matriz.dto.mappers.evento.EventoCreateDTOMapper;
+import com.seguridad.matriz.dto.mappers.evento.EventoUpdateDTOMapper;
+import com.seguridad.matriz.dto.mappers.evento.EventoViewDTOMapper;
 import com.seguridad.matriz.service.CrudService;
 import com.seguridad.matriz.service.EventosService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -34,6 +36,28 @@ public class EventosController extends AbstractCrudController<EventoCreateDTO, E
     @Override
     public EventoViewDTO getById(Map<String, String> idMap) {
         return super.getById(idMap);
+    }
+
+    @GetMapping("/serach-by-user/{userid}")
+    @PreAuthorize("hasAnyRole('superadmin_client','user_client')")
+    public List<EventoViewDTO> getByUserId(@PathVariable String userid) {
+        return service.getEventosByUserId(userid)
+                .stream()
+                .map(viewDTOMapper::map)
+                .toList();
+    }
+
+
+    @PostMapping("/assign-user/{idEvent}/{userid}")
+    @PreAuthorize("hasAnyRole('admin_client','superadmin_client')")
+    public void assignUserToEvent(@PathVariable Long idEvent, @PathVariable String userid) {
+        service.assingUserToEvent(userid, idEvent);
+    }
+
+    @DeleteMapping("/unassign-user/{idEvent}")
+    @PreAuthorize("hasAnyRole('admin_client','superadmin_client')")
+    public void unassignUserToEvent(@PathVariable Long idEvent) {
+        service.unassingUserToEvent(idEvent);
     }
 
     @PutMapping("/{" + EVENT_ID + "}")

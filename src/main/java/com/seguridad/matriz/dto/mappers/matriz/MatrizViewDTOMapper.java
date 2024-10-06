@@ -1,7 +1,9 @@
-package com.seguridad.matriz.dto.mappers;
+package com.seguridad.matriz.dto.mappers.matriz;
 
 import com.seguridad.matriz.domain.Matriz;
-import com.seguridad.matriz.dto.MatrizViewDTO;
+import com.seguridad.matriz.dto.mappers.DTOMapper;
+import com.seguridad.matriz.dto.mappers.evento.EventoViewDTOMapper;
+import com.seguridad.matriz.dto.matriz.MatrizViewDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -39,7 +41,7 @@ public class MatrizViewDTOMapper implements DTOMapper<Matriz, MatrizViewDTO> {
                 matriz.getEventos() != null
                         ? matriz.getEventos().stream().map(eventoViewDTOMapper::map).toList()
                         : Collections.emptyList(),
-                matriz.getIdUsuario()
+                matriz.getIdEmpresa()
         );
     }
 }

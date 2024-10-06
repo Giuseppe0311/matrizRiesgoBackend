@@ -3,6 +3,8 @@ package com.seguridad.matriz.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
@@ -21,7 +23,7 @@ public class Eventos extends EntitySuperClass  implements DomainObject<Long> {
     private String dominio;
     private String objetivo;
     private String control;
-    private Long idUsuario;
     @ManyToOne
     private Matriz matriz;
+    private String idUsuarioAsignado;
 }

@@ -1,8 +1,9 @@
-package com.seguridad.matriz.dto.mappers;
+package com.seguridad.matriz.dto.mappers.evento;
 
 import com.seguridad.matriz.domain.Eventos;
 import com.seguridad.matriz.domain.Matriz;
-import com.seguridad.matriz.dto.EventoCreateDTO;
+import com.seguridad.matriz.dto.evento.EventoCreateDTO;
+import com.seguridad.matriz.dto.mappers.DTOMapper;
 import com.seguridad.matriz.repository.MatrizRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -25,7 +26,7 @@ public class EventoCreateDTOMapper implements DTOMapper<EventoCreateDTO, Eventos
                 .objetivo(eventoCreateDTO.objetivo())
                 .control(eventoCreateDTO.control())
                 .matriz(getMatrizById(eventoCreateDTO.idMatriz()))
-                .idUsuario(eventoCreateDTO.idUsuario())
+                .idUsuarioAsignado(eventoCreateDTO.idUsuarioAsignado())
                 .build();
     }
 

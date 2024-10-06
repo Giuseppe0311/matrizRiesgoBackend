@@ -1,4 +1,4 @@
-package com.seguridad.matriz.dto;
+package com.seguridad.matriz.dto.iso;
 
 public record IsoViewDTO(
         Long id,

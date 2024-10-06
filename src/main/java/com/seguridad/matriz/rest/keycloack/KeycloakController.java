@@ -1,7 +1,8 @@
 package com.seguridad.matriz.rest.keycloack;
 
-import com.seguridad.matriz.dto.UserDTO;
+import com.seguridad.matriz.dto.user.UserDTO;
 import com.seguridad.matriz.service.keycloak.KeycloakService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/keycloak/user")
-@PreAuthorize("hasRole('admin_client')")
+@PreAuthorize("hasRole('superadmin_client')")
 @RequiredArgsConstructor
 public class KeycloakController {
 
@@ -25,6 +26,12 @@ public class KeycloakController {
         return ResponseEntity.ok(keycloakService.findAllUsers());
     }
 
+    @GetMapping("/search/profile/{profile}")
+    @PreAuthorize("hasRole('admin_client')")
+    public ResponseEntity<?> searchUserByProfile(@PathVariable String profile){
+        return ResponseEntity.ok(keycloakService.searchUserByProfile(profile));
+    }
+
 
     @GetMapping("/search/{username}")
     public ResponseEntity<?> searchUserByUsername(@PathVariable String username){
@@ -33,7 +40,7 @@ public class KeycloakController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) throws URISyntaxException {
+    public ResponseEntity<?> createUser(@RequestBody @Valid UserDTO userDTO) throws URISyntaxException {
         String response = keycloakService.createUser(userDTO);
         return ResponseEntity.created(new URI("/keycloak/user/create")).body(
                 Map.of("message", response)

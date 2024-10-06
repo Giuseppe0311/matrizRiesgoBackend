@@ -1,7 +1,8 @@
-package com.seguridad.matriz.dto.mappers;
+package com.seguridad.matriz.dto.mappers.matriz;
 
 import com.seguridad.matriz.domain.Matriz;
-import com.seguridad.matriz.dto.MatrizUpdateDTO;
+import com.seguridad.matriz.dto.mappers.DTOMapper;
+import com.seguridad.matriz.dto.matriz.MatrizUpdateDTO;
 import org.springframework.stereotype.Component;
 
 @Component

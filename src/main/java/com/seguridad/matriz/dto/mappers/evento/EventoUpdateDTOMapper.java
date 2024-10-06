@@ -1,7 +1,8 @@
-package com.seguridad.matriz.dto.mappers;
+package com.seguridad.matriz.dto.mappers.evento;
 
 import com.seguridad.matriz.domain.Eventos;
-import com.seguridad.matriz.dto.EventoUpdateDTO;
+import com.seguridad.matriz.dto.evento.EventoUpdateDTO;
+import com.seguridad.matriz.dto.mappers.DTOMapper;
 import org.springframework.stereotype.Component;
 
 @Component

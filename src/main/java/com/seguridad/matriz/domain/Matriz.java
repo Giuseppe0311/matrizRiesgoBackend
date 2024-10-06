@@ -33,7 +33,7 @@ public class Matriz extends EntitySuperClass implements DomainObject<Long> {
     private Integer aNaranja;
     private Integer deRojo;
     private Integer aRojo;
-    private Long idUsuario;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "matriz")
     private List<Eventos> eventos;
+    private Long idEmpresa;
 }

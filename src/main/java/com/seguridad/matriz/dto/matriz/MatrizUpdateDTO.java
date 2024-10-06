@@ -1,6 +1,6 @@
-package com.seguridad.matriz.dto;
+package com.seguridad.matriz.dto.matriz;
 
-public record MatrizCreateDTO(
+public record MatrizUpdateDTO(
         String nombre,
         Integer minima,
         Integer menor,
@@ -19,8 +19,6 @@ public record MatrizCreateDTO(
         Integer deNaranja,
         Integer aNaranja,
         Integer deRojo,
-        Integer aRojo,
-        Long idUsuario
-
+        Integer aRojo
 ) {
 }

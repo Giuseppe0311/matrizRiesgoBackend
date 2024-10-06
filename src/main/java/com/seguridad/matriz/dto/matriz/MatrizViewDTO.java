@@ -1,6 +1,11 @@
-package com.seguridad.matriz.dto;
+package com.seguridad.matriz.dto.matriz;
 
-public record MatrizUpdateDTO(
+import com.seguridad.matriz.dto.evento.EventoViewDTO;
+
+import java.util.List;
+
+public record MatrizViewDTO(
+        Long id,
         String nombre,
         Integer minima,
         Integer menor,
@@ -19,6 +24,9 @@ public record MatrizUpdateDTO(
         Integer deNaranja,
         Integer aNaranja,
         Integer deRojo,
-        Integer aRojo
-) {
+        Integer aRojo,
+        List<EventoViewDTO> eventos,
+        Long idEmpresa
+
+        ) {
 }

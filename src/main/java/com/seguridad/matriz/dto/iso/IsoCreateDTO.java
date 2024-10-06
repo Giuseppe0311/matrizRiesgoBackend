@@ -1,6 +1,7 @@
-package com.seguridad.matriz.dto;
+package com.seguridad.matriz.dto.iso;
 
-public record IsoUpdateDTO(
+
+public record IsoCreateDTO(
         String dominio,
         String objetivo,
         String control

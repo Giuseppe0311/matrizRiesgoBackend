@@ -1,7 +1,8 @@
-package com.seguridad.matriz.dto.mappers;
+package com.seguridad.matriz.dto.mappers.matriz;
 
 import com.seguridad.matriz.domain.Matriz;
-import com.seguridad.matriz.dto.MatrizCreateDTO;
+import com.seguridad.matriz.dto.mappers.DTOMapper;
+import com.seguridad.matriz.dto.matriz.MatrizCreateDTO;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,7 +29,7 @@ public class MatrizCreateDTOMapper implements DTOMapper<MatrizCreateDTO, Matriz>
                 .aNaranja(matrizCreateDTO.aNaranja())
                 .deRojo(matrizCreateDTO.deRojo())
                 .aRojo(matrizCreateDTO.aRojo())
-                .idUsuario(matrizCreateDTO.idUsuario())
+                .idEmpresa(matrizCreateDTO.idEmpresa())
                 .build();
     }
 }

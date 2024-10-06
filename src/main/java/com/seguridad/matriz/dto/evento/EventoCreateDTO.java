@@ -1,6 +1,6 @@
-package com.seguridad.matriz.dto;
+package com.seguridad.matriz.dto.evento;
 
-public record EventoUpdateDTO(
+public record EventoCreateDTO(
         String nombre,
         String nivelRiesgo,
         String probabilidad,
@@ -8,6 +8,8 @@ public record EventoUpdateDTO(
         Integer valor,
         String dominio,
         String objetivo,
-        String control
+        String control,
+        Long idMatriz,
+        String idUsuarioAsignado
 ) {
 }
