@@ -20,6 +20,11 @@ spring:
     password: ${spring.datasource.password}
     url: jdbc:postgresql://localhost:5436/seg
     locations: db.migration
+  ai:
+    ollama:
+      chat:
+        options:
+          model: llama3.2
 jwt:
   auth:
     converter:
