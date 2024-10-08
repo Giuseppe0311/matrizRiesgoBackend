@@ -47,4 +47,4 @@ services:
       KC_DB_PASSWORD: secret
       KEYCLOAK_FRONTEND_URL: http://matriz-keycloak:8080
     volumes:
-      - ./keycloak/keycloack.json.json:/opt/keycloak/data/import/backup.json
+      - ./keycloak/keycloack.json:/opt/keycloak/data/import/backup.json
