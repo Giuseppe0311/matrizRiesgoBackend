@@ -73,3 +73,5 @@ CREATE TABLE usuarios
 
 ALTER TABLE eventos
     ADD CONSTRAINT FK_EVENTOS_ON_MATRIZ FOREIGN KEY (matriz_id) REFERENCES matriz (id);
+
+INSERT INTO empresas(nombre,estado) values ('Empresa Demo',true);

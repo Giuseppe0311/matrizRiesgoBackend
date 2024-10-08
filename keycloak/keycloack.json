@@ -94,6 +94,19 @@
       "containerId" : "c9422be8-266a-49ff-9b34-18a0ca5c7b32",
       "attributes" : { }
     }, {
+      "id" : "87b1be42-7fbc-43a9-b1de-8bfb0f2260a5",
+      "name" : "superadmin",
+      "description" : "Super Admin del Realm",
+      "composite" : true,
+      "composites" : {
+        "client" : {
+          "matriz-riesgo" : [ "superadmin_client" ]
+        }
+      },
+      "clientRole" : false,
+      "containerId" : "c9422be8-266a-49ff-9b34-18a0ca5c7b32",
+      "attributes" : { }
+    }, {
       "id" : "d4b29407-d9df-46fa-8a8d-d9adb978531e",
       "name" : "uma_authorization",
       "description" : "${role_uma_authorization}",
@@ -104,6 +117,14 @@
     } ],
     "client" : {
       "matriz-riesgo" : [ {
+        "id" : "ff72bb37-447e-4ff1-8795-a98ddcefd4f7",
+        "name" : "superadmin_client",
+        "description" : "Super Admin del Cliente",
+        "composite" : false,
+        "clientRole" : true,
+        "containerId" : "39db15ac-290e-40af-a107-f38ac0218bd8",
+        "attributes" : { }
+      }, {
         "id" : "7959b012-94d4-42fc-a1ea-b2c410741348",
         "name" : "user_client",
         "description" : "usuario cliente",
@@ -273,7 +294,7 @@
         "composite" : true,
         "composites" : {
           "client" : {
-            "realm-management" : [ "manage-realm", "query-realms", "create-client", "view-events", "view-clients", "manage-clients", "manage-identity-providers", "query-groups", "query-users", "view-realm", "view-users", "query-clients", "manage-authorization", "manage-users", "view-authorization", "impersonation", "view-identity-providers", "manage-events" ]
+            "realm-management" : [ "manage-realm", "query-realms", "create-client", "view-events", "view-clients", "manage-clients", "manage-identity-providers", "query-groups", "query-users", "view-realm", "view-users", "query-clients", "manage-authorization", "manage-users", "impersonation", "view-authorization", "view-identity-providers", "manage-events" ]
           }
         },
         "clientRole" : true,
@@ -432,72 +453,6 @@
   "webAuthnPolicyPasswordlessAcceptableAaguids" : [ ],
   "webAuthnPolicyPasswordlessExtraOrigins" : [ ],
   "users" : [ {
-    "id" : "a123fead-5366-4da4-876a-819f1437c140",
-    "username" : "claudio",
-    "firstName" : "Claudio Adrian",
-    "lastName" : "Barrera Romero",
-    "email" : "claudio@hotmail.com",
-    "emailVerified" : true,
-    "createdTimestamp" : 1727999823576,
-    "enabled" : true,
-    "totp" : false,
-    "credentials" : [ {
-      "id" : "ba60ec3b-bdd0-4355-82f1-85ff8f48f688",
-      "type" : "password",
-      "createdDate" : 1727999824018,
-      "secretData" : "{\"value\":\"MDn11x/hxPeaLBGLPDgSlpARMueFI6qpGmFzq8Eo5aM=\",\"salt\":\"slmpg4MooSYqh2wQSfvvjw==\",\"additionalParameters\":{}}",
-      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
-    } ],
-    "disableableCredentialTypes" : [ ],
-    "requiredActions" : [ ],
-    "realmRoles" : [ "admin", "default-roles-matriz" ],
-    "notBefore" : 0,
-    "groups" : [ ]
-  }, {
-    "id" : "e80a48e2-f311-4ed2-86c9-c24f76931fdb",
-    "username" : "deneria",
-    "firstName" : "deneria",
-    "lastName" : "grandez",
-    "email" : "deneria@gmail.com",
-    "emailVerified" : true,
-    "createdTimestamp" : 1728005174738,
-    "enabled" : true,
-    "totp" : false,
-    "credentials" : [ {
-      "id" : "8969d251-14ab-491b-b069-f0442dbe18af",
-      "type" : "password",
-      "createdDate" : 1728005174825,
-      "secretData" : "{\"value\":\"SIdolBBQnmalQTDKSpS6DJ7Okd/75yNOecUNHk7oSFs=\",\"salt\":\"FlPdOkDvpBHA1kf5sXIZVw==\",\"additionalParameters\":{}}",
-      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
-    } ],
-    "disableableCredentialTypes" : [ ],
-    "requiredActions" : [ ],
-    "realmRoles" : [ "default-roles-matriz", "user" ],
-    "notBefore" : 0,
-    "groups" : [ ]
-  }, {
-    "id" : "121aa521-b7a9-4b03-9430-9932bbaf0f56",
-    "username" : "diego",
-    "firstName" : "Diego Graciela",
-    "lastName" : "Rengifo Lozano",
-    "email" : "diegomiamor@hotmail.com",
-    "emailVerified" : true,
-    "createdTimestamp" : 1727992870052,
-    "enabled" : true,
-    "totp" : false,
-    "credentials" : [ {
-      "id" : "34ae78af-a8fb-4e8b-a100-8d7c80d58b4c",
-      "type" : "password",
-      "createdDate" : 1727992947699,
-      "secretData" : "{\"value\":\"47GN+lslMF4YX2Hm/jua8lxK3by+Ruj1C5ch9P4DEi8=\",\"salt\":\"9wJT1A4bXZFS1MSjPd4F3A==\",\"additionalParameters\":{}}",
-      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
-    } ],
-    "disableableCredentialTypes" : [ ],
-    "requiredActions" : [ ],
-    "realmRoles" : [ "admin", "default-roles-matriz" ],
-    "notBefore" : 0,
-    "groups" : [ ]
-  }, {
     "id" : "4df6cf98-b16f-4026-86e3-4a90beb6d3e8",
     "username" : "giuseppe",
     "firstName" : "Angel Giuseppe",
@@ -517,33 +472,10 @@
     } ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
-    "realmRoles" : [ "admin", "default-roles-matriz" ],
+    "realmRoles" : [ "default-roles-matriz", "superadmin" ],
     "clientRoles" : {
       "realm-management" : [ "view-users", "manage-users", "query-users" ]
     },
-    "notBefore" : 0,
-    "groups" : [ ]
-  }, {
-    "id" : "5a3a71f5-2e2b-418c-9373-78aabe75213e",
-    "username" : "monica",
-    "firstName" : "Monica Gabriela",
-    "lastName" : "Leveau Paredes",
-    "email" : "donnieben769@gmail.com",
-    "emailVerified" : true,
-    "createdTimestamp" : 1727963510652,
-    "enabled" : true,
-    "totp" : false,
-    "credentials" : [ {
-      "id" : "05539b5a-5f7e-41e6-b444-595c57dee619",
-      "type" : "password",
-      "userLabel" : "My password",
-      "createdDate" : 1727963559878,
-      "secretData" : "{\"value\":\"Nlo3M/vSbckrtPVGrYEiG3LencFjDUfBw8DcFMX3US4=\",\"salt\":\"oeZzILepaiyq0Q354pl7Kg==\",\"additionalParameters\":{}}",
-      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
-    } ],
-    "disableableCredentialTypes" : [ ],
-    "requiredActions" : [ ],
-    "realmRoles" : [ "default-roles-matriz", "user" ],
     "notBefore" : 0,
     "groups" : [ ]
   }, {
@@ -660,7 +592,9 @@
     "publicClient" : true,
     "frontchannelLogout" : false,
     "protocol" : "openid-connect",
-    "attributes" : { },
+    "attributes" : {
+      "post.logout.redirect.uris" : "+"
+    },
     "authenticationFlowBindingOverrides" : { },
     "fullScopeAllowed" : false,
     "nodeReRegistrationTimeout" : 0,
@@ -686,7 +620,9 @@
     "publicClient" : false,
     "frontchannelLogout" : false,
     "protocol" : "openid-connect",
-    "attributes" : { },
+    "attributes" : {
+      "post.logout.redirect.uris" : "+"
+    },
     "authenticationFlowBindingOverrides" : { },
     "fullScopeAllowed" : false,
     "nodeReRegistrationTimeout" : 0,
@@ -736,8 +672,9 @@
       "consentRequired" : false,
       "config" : {
         "user.session.note" : "client_id",
-        "id.token.claim" : "true",
         "introspection.token.claim" : "true",
+        "userinfo.token.claim" : "true",
+        "id.token.claim" : "true",
         "access.token.claim" : "true",
         "claim.name" : "client_id",
         "jsonType.label" : "String"
@@ -750,8 +687,9 @@
       "consentRequired" : false,
       "config" : {
         "user.session.note" : "clientAddress",
-        "id.token.claim" : "true",
         "introspection.token.claim" : "true",
+        "userinfo.token.claim" : "true",
+        "id.token.claim" : "true",
         "access.token.claim" : "true",
         "claim.name" : "clientAddress",
         "jsonType.label" : "String"
@@ -764,14 +702,15 @@
       "consentRequired" : false,
       "config" : {
         "user.session.note" : "clientHost",
-        "id.token.claim" : "true",
         "introspection.token.claim" : "true",
+        "userinfo.token.claim" : "true",
+        "id.token.claim" : "true",
         "access.token.claim" : "true",
         "claim.name" : "clientHost",
         "jsonType.label" : "String"
       }
     } ],
-    "defaultClientScopes" : [ "web-origins", "acr", "roles", "profile", "basic", "email" ],
+    "defaultClientScopes" : [ "web-origins", "acr", "roles", "profile", "empresa", "basic", "email" ],
     "optionalClientScopes" : [ "address", "phone", "offline_access", "microprofile-jwt" ]
   }, {
     "id" : "e5b3b932-96c2-4e0e-ab13-ffc2c37cf155",
@@ -793,7 +732,9 @@
     "publicClient" : false,
     "frontchannelLogout" : false,
     "protocol" : "openid-connect",
-    "attributes" : { },
+    "attributes" : {
+      "post.logout.redirect.uris" : "+"
+    },
     "authenticationFlowBindingOverrides" : { },
     "fullScopeAllowed" : false,
     "nodeReRegistrationTimeout" : 0,
@@ -996,8 +937,9 @@
       "consentRequired" : false,
       "config" : {
         "user.session.note" : "AUTH_TIME",
-        "id.token.claim" : "true",
         "introspection.token.claim" : "true",
+        "userinfo.token.claim" : "true",
+        "id.token.claim" : "true",
         "access.token.claim" : "true",
         "claim.name" : "auth_time",
         "jsonType.label" : "long"
@@ -1072,7 +1014,8 @@
       "config" : {
         "id.token.claim" : "true",
         "introspection.token.claim" : "true",
-        "access.token.claim" : "true"
+        "access.token.claim" : "true",
+        "userinfo.token.claim" : "true"
       }
     } ]
   }, {
@@ -1332,6 +1275,36 @@
       }
     } ]
   }, {
+    "id" : "caddce05-4931-41c4-9a71-6a2a037d3d8c",
+    "name" : "empresa",
+    "description" : "El id de la empresa al que pertenece el usuario",
+    "protocol" : "openid-connect",
+    "attributes" : {
+      "include.in.token.scope" : "true",
+      "display.on.consent.screen" : "false",
+      "gui.order" : "",
+      "consent.screen.text" : ""
+    },
+    "protocolMappers" : [ {
+      "id" : "f509c201-9172-42bd-920a-a8ee39e881ef",
+      "name" : "empresa-id",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-attribute-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "aggregate.attrs" : "false",
+        "introspection.token.claim" : "true",
+        "multivalued" : "false",
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "idEmpresa",
+        "id.token.claim" : "true",
+        "lightweight.claim" : "false",
+        "access.token.claim" : "true",
+        "claim.name" : "empresa_id",
+        "jsonType.label" : "long"
+      }
+    } ]
+  }, {
     "id" : "2f288301-4ef6-4718-8a96-d978f4a4fcfb",
     "name" : "microprofile-jwt",
     "description" : "Microprofile - JWT built-in scope",
@@ -1349,6 +1322,7 @@
       "config" : {
         "introspection.token.claim" : "true",
         "multivalued" : "true",
+        "userinfo.token.claim" : "true",
         "user.attribute" : "foo",
         "id.token.claim" : "true",
         "access.token.claim" : "true",
@@ -1372,7 +1346,7 @@
       }
     } ]
   } ],
-  "defaultDefaultClientScopes" : [ "role_list", "profile", "email", "roles", "web-origins", "acr", "basic" ],
+  "defaultDefaultClientScopes" : [ "role_list", "profile", "email", "roles", "web-origins", "acr", "basic", "empresa" ],
   "defaultOptionalClientScopes" : [ "offline_access", "address", "phone", "microprofile-jwt" ],
   "browserSecurityHeaders" : {
     "contentSecurityPolicyReportOnly" : "",
@@ -1400,7 +1374,7 @@
       "subType" : "authenticated",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "oidc-full-name-mapper", "saml-role-list-mapper", "saml-user-attribute-mapper", "saml-user-property-mapper", "oidc-address-mapper", "oidc-usermodel-property-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-usermodel-attribute-mapper" ]
+        "allowed-protocol-mapper-types" : [ "oidc-usermodel-property-mapper", "oidc-usermodel-attribute-mapper", "oidc-address-mapper", "oidc-full-name-mapper", "saml-user-attribute-mapper", "oidc-sha256-pairwise-sub-mapper", "saml-role-list-mapper", "saml-user-property-mapper" ]
       }
     }, {
       "id" : "fde4d53f-991b-4ec8-88a2-31ef819bce76",
@@ -1460,7 +1434,15 @@
       "subType" : "anonymous",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "saml-user-property-mapper", "oidc-address-mapper", "oidc-usermodel-property-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-usermodel-attribute-mapper", "saml-user-attribute-mapper", "oidc-full-name-mapper", "saml-role-list-mapper" ]
+        "allowed-protocol-mapper-types" : [ "oidc-full-name-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-usermodel-attribute-mapper", "oidc-usermodel-property-mapper", "saml-user-attribute-mapper", "oidc-address-mapper", "saml-user-property-mapper", "saml-role-list-mapper" ]
+      }
+    } ],
+    "org.keycloak.userprofile.UserProfileProvider" : [ {
+      "id" : "302f7435-a78c-49bb-9d0e-9410fb5b1d9f",
+      "providerId" : "declarative-user-profile",
+      "subComponents" : { },
+      "config" : {
+        "kc.user.profile.config" : [ "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"idEmpresa\",\"displayName\":\"idEmpresa\",\"validations\":{},\"annotations\":{},\"permissions\":{\"view\":[],\"edit\":[\"admin\"]},\"multivalued\":false}],\"groups\":[{\"name\":\"user-metadata\",\"displayHeader\":\"User metadata\",\"displayDescription\":\"Attributes, which refer to user metadata\"}]}" ]
       }
     } ],
     "org.keycloak.keys.KeyProvider" : [ {
@@ -2199,8 +2181,8 @@
   "attributes" : {
     "cibaBackchannelTokenDeliveryMode" : "poll",
     "cibaAuthRequestedUserHint" : "login_hint",
-    "oauth2DevicePollingInterval" : "5",
     "clientOfflineSessionMaxLifespan" : "0",
+    "oauth2DevicePollingInterval" : "5",
     "clientSessionIdleTimeout" : "0",
     "clientOfflineSessionIdleTimeout" : "0",
     "cibaInterval" : "5",
