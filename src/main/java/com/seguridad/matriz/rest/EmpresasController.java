@@ -11,8 +11,7 @@ import com.seguridad.matriz.dto.mappers.empresa.EmpresaViewDTOMapper;
 import com.seguridad.matriz.service.CrudService;
 import com.seguridad.matriz.service.EmpresasService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -25,7 +24,26 @@ public class EmpresasController extends AbstractCrudController<EmpresaCreateDTO,
     private final EmpresaCreateDTOMapper createDTOMapper;
     private final EmpresaUpdateDTOMapper updateDTOMapper;
     private final EmpresaViewDTOMapper viewDTOMapper;
+    private static final String EMPRESA_ID = "id";
 
+
+    @Override
+    @GetMapping("/{" + EMPRESA_ID + "}")
+    public EmpresaViewDTO getById(Map<String, String> idMap) {
+        return super.getById(idMap);
+    }
+
+    @Override
+    @PutMapping("/{" + EMPRESA_ID + "}")
+    public EmpresaViewDTO update(EmpresaUpdateDTO updateDTO, Map<String, String> idMap) {
+        return super.update(updateDTO, idMap);
+    }
+
+    @Override
+    @DeleteMapping("/{" + EMPRESA_ID + "}")
+    public void delete(Map<String, String> idMap) {
+        super.delete(idMap);
+    }
 
     @Override
     protected CrudService<Empresas, Long> getService() {
@@ -49,6 +67,6 @@ public class EmpresasController extends AbstractCrudController<EmpresaCreateDTO,
 
     @Override
     protected DTOMapper<Map<String, String>, Long> getIdMapper() {
-        return id->Long.parseLong(id.get("id"));
+        return id->Long.parseLong(id.get(EMPRESA_ID));
     }
 }

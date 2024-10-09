@@ -18,10 +18,9 @@ import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Service;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -63,23 +62,30 @@ public class KeycloakServiceImpl implements KeycloakService{
     }
 
     private List<UserRepresentation> getUserRepresentations(List<UserRepresentation> users) {
-        users.forEach(user -> {
-            List<RoleRepresentation> realmRoleRepresentations = KeycloakProvider.getRealmResource()
-                    .users()
-                    .get(user.getId())
-                    .roles()
-                    .realmLevel()
-                    .listAll();
+        return users.stream()
+                .filter(user -> {
+                    List<RoleRepresentation> realmRoleRepresentations = KeycloakProvider.getRealmResource()
+                            .users()
+                            .get(user.getId())
+                            .roles()
+                            .realmLevel()
+                            .listAll();
 
-            List<String> roleNames = realmRoleRepresentations.stream()
-                    .map(RoleRepresentation::getName)
-                    .filter(roleName -> !roleName.startsWith("default"))  // Filtrar roles que no comienzan con "default"
-                    .toList();
+                    boolean isNotSuperAdmin = realmRoleRepresentations.stream()
+                            .noneMatch(role -> "superadmin".equals(role.getName()));
 
-            user.setRealmRoles(roleNames);
-        });
+                    if (isNotSuperAdmin) {
+                        List<String> roleNames = realmRoleRepresentations.stream()
+                                .map(RoleRepresentation::getName)
+                                .filter(roleName -> !roleName.startsWith("default"))
+                                .toList();
 
-        return users;
+                        user.setRealmRoles(roleNames);
+                        return true;
+                    }
+                    return false;
+                })
+                .collect(Collectors.toList());
     }
 
     @Override
