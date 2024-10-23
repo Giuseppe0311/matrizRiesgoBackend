@@ -3,6 +3,7 @@ package com.seguridad.matriz.rest.ai;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/ia")
 @PreAuthorize("hasAnyRole('user_client')")
+@Slf4j
 public class AiController {
 
     private final ChatModel chatModel;
@@ -242,9 +244,13 @@ public class AiController {
 
         // Combinación del contexto y los parámetros
         String fullPrompt = context + String.format(promptTemplate, event, riskLevel, probability, impact, value);
+        log.info("Prompt enviado a Ollama: {}", fullPrompt);
 
         // Llamada al modelo AI
         String aiResponse = chatModel.call(fullPrompt);
+
+        log.info("Respuesta de Ollama: {}", aiResponse);
+
 
         // Convierte la respuesta de la IA a un objeto ResponseAiDTO
         return objectMapper.readValue(aiResponse, ResponseAiDTO.class);
