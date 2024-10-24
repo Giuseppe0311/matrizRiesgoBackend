@@ -2,7 +2,7 @@ spring:
   application:
     name: matriz
   datasource:
-    url: jdbc:postgresql://postgres:5432/seg  # Cambiado de localhost a postgres (nombre del servicio)
+    url: jdbc:postgresql://localhost:5436/seg  # Cambiado de localhost a postgres (nombre del servicio)
     username: user
     password: secret
     driver-class-name: org.postgresql.Driver
@@ -13,19 +13,18 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri:  http://matriz-keycloak:8080/realms/matriz  # Cambiado de localhost a matriz-keycloak (nombre del servicio)
-          jwk-set-uri: http://matriz-keycloak:8080/realms/matriz/protocol/openid-connect/certs  # Igual aquí
+          issuer-uri:  http://localhost:8080/realms/matriz  # Cambiado de localhost a matriz-keycloak (nombre del servicio)
+          jwk-set-uri: http://localhost:8080/realms/matriz/protocol/openid-connect/certs  # Igual aquí
   flyway:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
-    url: jdbc:postgresql://postgres:5432/seg  # Cambiado de localhost a postgres
+    url: jdbc:postgresql://localhost:5436/seg  # Cambiado de localhost a postgres
     locations: db.migration
   ai:
     ollama:
       chat:
         options:
           model: llama3.2
-      base-url: http://ollama:11434
 jwt:
   auth:
     converter:
@@ -33,3 +32,4 @@ jwt:
       resource-id: matriz-riesgo
 server:
   port: 9098
+  address: 0.0.0.0
