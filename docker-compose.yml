@@ -48,3 +48,15 @@ services:
       KEYCLOAK_FRONTEND_URL: http://matriz-keycloak:8080
     volumes:
       - ./keycloak/keycloack.json:/opt/keycloak/data/import/backup.json
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11435:11434"
+    restart: unless-stopped
+    volumes:
+      - ollama_data:/root/.ollama
+
+volumes:
+  ollama_data:
