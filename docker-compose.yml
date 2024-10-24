@@ -53,10 +53,18 @@ services:
     image: ollama/ollama:latest
     container_name: ollama
     ports:
-      - "11435:11434"
+      - "11434:11434"
     restart: unless-stopped
     volumes:
       - ollama_data:/root/.ollama
-
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+      - matriz-keycloak
+    ports:
+      - "9098:9098"
 volumes:
   ollama_data:
